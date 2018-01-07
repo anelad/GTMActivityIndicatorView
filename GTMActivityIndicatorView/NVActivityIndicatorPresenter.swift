@@ -19,8 +19,14 @@ public final class ActivityData {
     /// Font of message displayed under activity indicator view.
     let messageFont: UIFont
     
+    private var animation : NVActivityIndicatorAnimation = NVActivityIndicatorAnimationBallSpinFadeLoader()
+    
     /// Animation type.
-    let animation: NVActivityIndicatorAnimation?
+    public var animationType: NVActivityIndicatorAnimationType = .ballSpinFadeLoader {
+        didSet{
+            animation = animationTypeToAnimation(type: animationType)
+        }
+    }
     
     /// Color of activity indicator view.
     let color: UIColor
@@ -53,7 +59,7 @@ public final class ActivityData {
     public init(size: CGSize? = nil,
                 message: String? = nil,
                 messageFont: UIFont? = nil,
-                animation: NVActivityIndicatorAnimation? = nil,
+                animationType: NVActivityIndicatorAnimationType? = nil,
                 color: UIColor? = nil,
                 padding: CGFloat? = nil,
                 displayTimeThreshold: Int? = nil,
@@ -61,7 +67,8 @@ public final class ActivityData {
         self.size = size ?? NVActivityIndicatorView.DEFAULT_BLOCKER_SIZE
         self.message = message ?? NVActivityIndicatorView.DEFAULT_BLOCKER_MESSAGE
         self.messageFont = messageFont ?? NVActivityIndicatorView.DEFAULT_BLOCKER_MESSAGE_FONT
-        self.animation = animation ?? NVActivityIndicatorAnimationBallSpinFadeLoader()
+        self.animationType = animationType ?? NVActivityIndicatorAnimationType.ballSpinFadeLoader
+        self.animation = animationTypeToAnimation(type: self.animationType)
         self.color = color ?? NVActivityIndicatorView.DEFAULT_COLOR
         self.padding = padding ?? NVActivityIndicatorView.DEFAULT_PADDING
         self.displayTimeThreshold = displayTimeThreshold ?? NVActivityIndicatorView.DEFAULT_BLOCKER_DISPLAY_TIME_THRESHOLD
@@ -130,7 +137,7 @@ public final class NVActivityIndicatorPresenter {
         let actualSize = activityData.size
         let activityIndicatorView = NVActivityIndicatorView(
             frame: CGRect(x: 0, y: 0, width: actualSize.width, height: actualSize.height),
-            animation: activityData.animation,
+            animationType: activityData.animationType,
             color: activityData.color,
             padding: activityData.padding)
         
