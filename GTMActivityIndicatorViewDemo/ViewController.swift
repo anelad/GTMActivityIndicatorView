@@ -11,39 +11,40 @@ import GTMActivityIndicatorView
 
 class ViewController: UIViewController {
     
-    let animations: [NVActivityIndicatorAnimation] = [NVActivityIndicatorAnimationAudioEqualizer(),
-                      NVActivityIndicatorAnimationBallBeat(),
-                      NVActivityIndicatorAnimationBallClipRotate(),
-                      NVActivityIndicatorAnimationBallClipRotateMultiple(),
-                      NVActivityIndicatorAnimationBallClipRotatePulse(),
-                      NVActivityIndicatorAnimationBallGridBeat(),
-                      NVActivityIndicatorAnimationBallGridPulse(),
-                      NVActivityIndicatorAnimationBallPulse(),
-                      NVActivityIndicatorAnimationBallPulseRise(),
-                      NVActivityIndicatorAnimationBallPulseSync(),
-                      NVActivityIndicatorAnimationBallRotate(),
-                      NVActivityIndicatorAnimationBallRotateChase(),
-                      NVActivityIndicatorAnimationBallScale(),
-                      NVActivityIndicatorAnimationBallScaleMultiple(),
-                      NVActivityIndicatorAnimationBallScaleRipple(),
-                      NVActivityIndicatorAnimationBallScaleRippleMultiple(),
-                      NVActivityIndicatorAnimationBallSpinFadeLoader(),
-                      NVActivityIndicatorAnimationBallTrianglePath(),
-                      NVActivityIndicatorAnimationBallZigZag(),
-                      NVActivityIndicatorAnimationBallZigZagDeflect(),
-                      NVActivityIndicatorAnimationBlank(),
-                      NVActivityIndicatorAnimationCubeTransition(),
-                      NVActivityIndicatorAnimationLineScale(),
-                      NVActivityIndicatorAnimationLineScaleParty(),
-                      NVActivityIndicatorAnimationLineScalePulseOut(),
-                      NVActivityIndicatorAnimationLineScalePulseOutRapid(),
-                      NVActivityIndicatorAnimationLineSpinFadeLoader(),
-                      NVActivityIndicatorAnimationOrbit(),
-                      NVActivityIndicatorAnimationPacman(),
-                      NVActivityIndicatorAnimationSemiCircleSpin(),
-                      NVActivityIndicatorAnimationSquareSpin(),
-                      NVActivityIndicatorAnimationTriangleSkewSpin()]
-
+    let animations: [NVActivityIndicatorAnimationType] = [
+        NVActivityIndicatorAnimationType.audioEqualizer,
+        NVActivityIndicatorAnimationType.ballBeat,
+        NVActivityIndicatorAnimationType.ballClipRotate,
+        NVActivityIndicatorAnimationType.ballClipRotateMultiple,
+        NVActivityIndicatorAnimationType.ballClipRotatePulse,
+        NVActivityIndicatorAnimationType.ballGridBeat,
+        NVActivityIndicatorAnimationType.ballGridPulse,
+        NVActivityIndicatorAnimationType.ballPulse,
+        NVActivityIndicatorAnimationType.ballPulseRise,
+        NVActivityIndicatorAnimationType.ballPulseSync,
+        NVActivityIndicatorAnimationType.ballRotate,
+        NVActivityIndicatorAnimationType.ballRotateChase,
+        NVActivityIndicatorAnimationType.ballScale,
+        NVActivityIndicatorAnimationType.ballScaleMultiple,
+        NVActivityIndicatorAnimationType.ballScaleRipple,
+        NVActivityIndicatorAnimationType.ballScaleRippleMultiple,
+        NVActivityIndicatorAnimationType.ballSpinFadeLoader,
+        NVActivityIndicatorAnimationType.ballTrianglePath,
+        NVActivityIndicatorAnimationType.ballZigZag,
+        NVActivityIndicatorAnimationType.ballZigZagDeflect,
+        NVActivityIndicatorAnimationType.blank,
+        NVActivityIndicatorAnimationType.cubeTransition,
+        NVActivityIndicatorAnimationType.lineScale,
+        NVActivityIndicatorAnimationType.lineScaleParty,
+        NVActivityIndicatorAnimationType.lineScalePulseOut,
+        NVActivityIndicatorAnimationType.lineScalePulseOutRapid,
+        NVActivityIndicatorAnimationType.lineSpinFadeLoader,
+        NVActivityIndicatorAnimationType.orbit,
+        NVActivityIndicatorAnimationType.pacman,
+        NVActivityIndicatorAnimationType.semiCircleSpin,
+        NVActivityIndicatorAnimationType.squareSpin,
+        NVActivityIndicatorAnimationType.triangleSkewSpin
+    ]
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,7 +62,7 @@ class ViewController: UIViewController {
             let y = index / cols * cellHeight
             let frame = CGRect(x: x, y: y, width: cellWidth, height: cellHeight)
             let activityIndicatorView = NVActivityIndicatorView(frame: frame,
-                                                                animation: animation)
+                                                                animationType: animation)
             let animationTypeLabel = UILabel(frame: frame)
             
             animationTypeLabel.text = String(index)
@@ -87,7 +88,7 @@ class ViewController: UIViewController {
     @objc func buttonTapped(_ sender: UIButton) {
         let size = CGSize(width: 30, height:30)
         
-        showIndicator(size, message: "Loading...", animation: animations[sender.tag], color: UIColor(red: 246/255, green: 83/255, blue: 20/255, alpha: 1.0))
+        showIndicator(size, message: "Loading...", animationType: animations[sender.tag], color: UIColor(red: 246/255, green: 83/255, blue: 20/255, alpha: 1.0))
         perform(#selector(delayedStopActivity),
                 with: nil,
                 afterDelay: 2.5)

@@ -33,8 +33,14 @@ public final class NVActivityIndicatorView: UIView {
     /// Default font of message displayed in UI blocker. Default value is bold system font, size 20.
     public static var DEFAULT_BLOCKER_MESSAGE_FONT = UIFont.boldSystemFont(ofSize: 20)
     
+    private var animation : NVActivityIndicatorAnimation = NVActivityIndicatorAnimationBallSpinFadeLoader()
+    
     /// Animation type.
-    public var animation: NVActivityIndicatorAnimation?
+    public var animationType: NVActivityIndicatorAnimationType = .ballSpinFadeLoader {
+        didSet{
+            animation = animationTypeToAnimation(type: animationType)
+        }
+    }
     
     /// Color of activity indicator view.
     @IBInspectable public var color: UIColor = NVActivityIndicatorView.DEFAULT_COLOR
@@ -59,7 +65,7 @@ public final class NVActivityIndicatorView: UIView {
      */
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.animation = NVActivityIndicatorAnimationBallSpinFadeLoader()
+        self.animation = animationTypeToAnimation(type: animationType)
         backgroundColor = UIColor.clear
         isHidden = true
     }
@@ -76,11 +82,14 @@ public final class NVActivityIndicatorView: UIView {
      
      - returns: The activity indicator view.
      */
-    public init(frame: CGRect, animation: NVActivityIndicatorAnimation? = nil, color: UIColor? = nil, padding: CGFloat? = nil) {
-        self.animation = animation ?? NVActivityIndicatorAnimationBallSpinFadeLoader()
+    public init(frame: CGRect, animationType: NVActivityIndicatorAnimationType? = nil, color: UIColor? = nil, padding: CGFloat? = nil) {
+        super.init(frame: frame)
+        if let animationType = animationType{
+            self.animationType = animationType
+            self.animation = animationTypeToAnimation(type: animationType)
+        }
         self.color = color ?? NVActivityIndicatorView.DEFAULT_COLOR
         self.padding = padding ?? NVActivityIndicatorView.DEFAULT_PADDING
-        super.init(frame: frame)
         isHidden = true
     }
     
@@ -126,6 +135,6 @@ public final class NVActivityIndicatorView: UIView {
         
         layer.sublayers = nil
         animationRect.size = CGSize(width: minEdge, height: minEdge)
-        animation!.setUpAnimation(in: layer, size: animationRect.size, color: color)
+        animation.setUpAnimation(in: layer, size: animationRect.size, color: color)
     }
 }

@@ -29,12 +29,12 @@ public extension UIViewController {
         _ size: CGSize? = nil,
         message: String? = nil,
         messageFont: UIFont? = nil,
-        animation: NVActivityIndicatorAnimation? = nil,
+        animationType: NVActivityIndicatorAnimationType? = nil,
         color: UIColor? = nil,
         padding: CGFloat? = nil,
         displayTimeThreshold: Int? = nil,
         minimumDisplayTime: Int? = nil) {
-        showIndicator(size, message: message, messageFont: messageFont, animation: animation, color: color, padding: padding, displayTimeThreshold: displayTimeThreshold, minimumDisplayTime: minimumDisplayTime)
+        showIndicator(size, message: message, messageFont: messageFont, animationType: animationType, color: color, padding: padding, displayTimeThreshold: displayTimeThreshold, minimumDisplayTime: minimumDisplayTime)
     }
     
     /**

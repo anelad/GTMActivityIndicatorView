@@ -159,7 +159,7 @@ There are global defaults for all `GTMActivityIndicatorView` instances.
 - Default animation type.
 
 ```swift
-默认动画 NVActivityIndicatorAnimationBallSpinFadeLoader
+默认动画 NVActivityIndicatorAnimationType.ballSpinFadeLoader
 ```
 
 - Default color of activity indicator view.
